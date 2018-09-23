@@ -43,9 +43,9 @@ const servers = [
   'wss://s1.ripple.com',
   'wss://s2.ripple.com'
 ]
-const address ='rUKoQ1Zhn6c8EfPsaVa2Yx5NqaKN1JQSvq';
+const address ='';//your wallet address
 
-const ISSUER ='rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B';
+const ISSUER ='';//holding your IOU's issure
 
 let ws = new Websocket(servers[0] + ':443')
   const subscribe = () => {
