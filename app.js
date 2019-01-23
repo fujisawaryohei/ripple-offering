@@ -1,19 +1,11 @@
-//node_module loading
 let createError = require('http-errors');
 let express = require('express');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
-//Core module
 let path = require('path');
-//File module
-//let indexRouter = require('./routes/index');
-//let usersRouter = require('./routes/users');
-//let samplesRouter = require('./routes/samples');
-//module.exportsで格納されたオブジェクトが返ってくる。今回はrouter
 const Websocket = require('ws')
 let app = express();
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -23,18 +15,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//app.use('/', indexRouter);
-//app.use('/users', usersRouter);
-//app.use('/samples',samplesRouter);
-
-// catch 404 and forward to error handler エラーハンドリング
 app.use(function(req, res, next) {
   let err=new Error('Not Found');
   err.status = 404;
   next(err);
-  //next(createError(404));
 });
-//nextはコールバック引数。非同期的な書き方をnextで実現できる。
 
 const transactionParser = require('ripple-lib-transactionparser');
 const parseBalanceChanges = transactionParser.parseBalanceChanges
@@ -52,7 +37,6 @@ let ws = new Websocket(servers[0] + ':443')
   let ws = new Websocket(servers[0] + ':443')
     ws.on('open',() => {
       console.log('connected web socket')
-    //JSON.stringify JSONフォーマットを成形する。
       ws.send(JSON.stringify({
         id:1,
         command:"subscribe",
@@ -87,13 +71,9 @@ const transactionlog = (balanceChanges,transaction)=>{
 
 subscribe(ws)
 
-// error handler development環境でのエラー出力処理
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });
