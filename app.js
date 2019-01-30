@@ -1,20 +1,28 @@
 let createError = require('http-errors');
-let express = require('express');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let path = require('path');
+let config = require('config');
 
 const WebsocketClient = require('websocket').w3cwebsocket;
 const transactionParser = require('ripple-lib-transactionparser');
 const parseBalanceChanges = transactionParser.parseBalanceChanges
-const address ='';//your wallet address
-const ISSUER ='';//holding your IOU's issure
+const address = config.env.address;//your wallet address
+const ISSUER = config.env.issuer;//holding your IOU's issure
 const wsc = new WebsocketClient('wss://s1.ripple.com:443');
 //requestFormat refelence→https://developers.ripple.com/websocket-api-tool.html
 const requestFormat = {
-  id: 1,
-  command: "account_info",
-  account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59"
+  id: 4,
+  command: "book_offers",
+  taker: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
+  taker_gets: {
+    currency: "XRP"
+  },
+  taker_pays: {
+    fcurrency: "USD",
+    issuer: "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"
+  },
+  "limit": 10
 }
 
 const subscribe = (wsc) => {
