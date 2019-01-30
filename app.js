@@ -22,7 +22,7 @@ const requestFormat = {
     fcurrency: "USD",
     issuer: "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"
   },
-  "limit": 10
+  limit: 10
 }
 
 const subscribe = (wsc) => {
