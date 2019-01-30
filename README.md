@@ -1,8 +1,8 @@
 # rippled-get-transaction-data
-##This scripts get Transaction data for RippleNetWork's WebsocketAPI
+## This scripts get Transaction data for RippleNetWork's WebsocketAPI
 You must manage Wallet address and Issuer in 'config/default.json'.
 
-##example
+## example
 config/default.json
 ```
 {
